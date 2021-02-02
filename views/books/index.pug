@@ -2,6 +2,10 @@ extends ../layout
 
 block content
     h1 Books
+    form(action="/books", method="get")
+        label(for='search') Search books: 
+        input#search(type='text' name='search') 
+        button Search 
     p
         a.button(href='/books/new') Create New Book
     table
@@ -15,7 +19,7 @@ block content
             each book in books
                 tr
                     td
-                        a(href='book_detail.html')= book.title
+                        a(href='/books/' + book.id)= book.title
                     td= book.author
                     td= book.genre
                     td= book.year

@@ -11,8 +11,6 @@ var app = express();
 // Import instance of Sequelize
 var sequelize = require('./models/index').sequelize;
 
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -43,9 +41,8 @@ app.use(function (err, req, res, next) {
   }
   if (err.status === 404) {
     console.log("404: ", err.status);
-    res.status(404).render('page_not_found', { err })
+    res.status(404).render('page-not-found', { err })
   } else {
-    // how do i manually trigger 500?
     console.log("500 or other: ", err.status);
     err.message = err.message || `Oops! It looks like something went wrong on the server`;
     res.status(err.status || 500).render('error', { err });
