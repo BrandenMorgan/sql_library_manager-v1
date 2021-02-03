@@ -1,8 +1,67 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 19px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("https://images.wallpaperscraft.com/image/books_pile_collection_123290_1600x1200.jpg")
+}
+
+input[type=text] {
+  width: 75%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type=text]:focus {
+  border: 3px solid #555;
 }
 
 a {
   color: #00B7FF;
 }
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #262626;
+  color: white;
+}
+
+/* .navigation { */
+  /* display: inline-block; */
+  /* position: fixed; */
+  /* left: 10%; */
+  /* bottom: 0px; */
+  /* transform: translate(-50%, -50%);  */
+  /* margin: 0 auto;
+/* } */
+
+.navigation .pager a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+.navigation a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.navigation a:hover:not(.active) {background-color: #ddd;}

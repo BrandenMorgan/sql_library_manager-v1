@@ -6,12 +6,12 @@ if paginate.hasPreviousPages || paginate.hasNextPages(pageCount)
         li.previous
           a(href=paginate.href(true)).prev
             i.fa.fa-arrow-circle-left
-            |  Previous
+            |  &laquo;
       if pages
         each page in pages
           a.btn.btn-default(href=page.url)= page.number
       if paginate.hasNextPages(pageCount)
         li.next
           a(href=paginate.href()).next
-            | Next&nbsp;
+            | &raquo;
             i.fa.fa-arrow-circle-right
