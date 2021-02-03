@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const paginate = require('express-paginate');
 
 const index = require('./routes/index');
 const books = require('./routes/books');
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(paginate.middleware(10, 50));
 app.use('/', index);
 app.use('/books', books);
 

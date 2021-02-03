@@ -8,19 +8,25 @@ block content
         button Search 
     p
         a.button(href='/books/new') Create New Book
-    table
-        thead
-            tr
-                th Title
-                th Author
-                th Genre
-                th Year
-        tbody
-            each book in books
+    if books.length > 0
+        table
+            thead
                 tr
-                    td
-                        a(href='/books/' + book.id)= book.title
-                    td= book.author
-                    td= book.genre
-                    td= book.year
+                    th Title
+                    th Author
+                    th Genre
+                    th Year
         
+            tbody
+                each book in books
+                    tr
+                        td
+                            a(href='/books/' + book.id)= book.title
+                        td= book.author
+                        td= book.genre
+                        td= book.year
+        include _paginate    
+    else 
+        h3 There are no results for your search...
+    p
+            a.button(href='/books') All books    

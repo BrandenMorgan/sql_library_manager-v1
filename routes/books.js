@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const Book = require('../models').Book;
+const { Op } = require("sequelize");
+const paginate = require('express-paginate');
 
 const err = new Error();
 err.status = 404;
@@ -18,33 +20,56 @@ function asyncHandler(cb) {
   }
 }
 
-// /* GET search results */
-// router.get('/:search', asyncHandler(async (req, res) => {
-//   const search = req.params.search;
-//   console.log(search);
-// }));
 
 /* GET books listing. */
 router.get('/', asyncHandler(async (req, res) => {
   const search = req.query.search;
-  // if (search) {
-  //   console.log("search: ", search);
-  // }
-  const books = await Book.findAll();
-  for (const book in books) {
-    const title = books[book].title;
-    const author = books[book].author;
-    const genre = books[book].genre;
-    const year = books[book].year;
-
-    console.log(`Title: ${title}, Author: ${author}, Genre: ${genre}, Year: ${year}`);
-
-    // if (search.includes(books[book])) {
-    //   console.log("Your search has results!")
-    // }
+  let books;
+  if (search) {
+    books = await Book.findAndCountAll({
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.like]: `%${search}%`
+            }
+          },
+          {
+            author: {
+              [Op.like]: `%${search}%`
+            }
+          },
+          {
+            genre: {
+              [Op.like]: `%${search}%`
+            }
+          },
+          {
+            year: {
+              [Op.like]: `%${search}%`
+            }
+          }
+        ]
+      },
+      limit: req.query.limit,
+      offset: req.skip,
+      order: [['createdAt', 'DESC']]
+    });
+  } else {
+    books = await Book.findAndCountAll({
+      limit: req.query.limit,
+      offset: req.skip,
+      order: [['createdAt', 'DESC']]
+    });
   }
-
-  res.render('books/index', { books });
+  const bookCount = books.count;
+  const pageCount = Math.ceil(books.count / req.query.limit);
+  res.render('books/index', {
+    books: books.rows, // Returns different obj from findAll()
+    pageCount,
+    bookCount,
+    pages: paginate.getArrayPages(req)(3, pageCount, req.query.page)
+  });
 }));
 
 /* Create new book form */
