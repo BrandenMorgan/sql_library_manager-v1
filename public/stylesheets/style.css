@@ -1,14 +1,16 @@
 body {
   padding: 50px;
   font: 19px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Gentium Book Basic', serif;
   background-image: url("https://images.wallpaperscraft.com/image/books_pile_collection_123290_1600x1200.jpg")
 }
 
 input[type=text] {
-  width: 75%;
+  width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  font-size: 100%
 }
 
 input[type=text]:focus {
@@ -16,19 +18,24 @@ input[type=text]:focus {
 }
 
 a {
-  color: #00B7FF;
+  color: #1966b3;
+}
+
+p a {
+  color: #ffff99;
 }
 
 table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 80%;
 }
 
 table td, #customers th {
   border: 1px solid #ddd;
   padding: 8px;
 }
+table tr:nth-child(odd){background-color:white;}
 
 table tr:nth-child(even){background-color: #f2f2f2;}
 
@@ -42,14 +49,6 @@ table th {
   color: white;
 }
 
-/* .navigation { */
-  /* display: inline-block; */
-  /* position: fixed; */
-  /* left: 10%; */
-  /* bottom: 0px; */
-  /* transform: translate(-50%, -50%);  */
-  /* margin: 0 auto;
-/* } */
 
 .navigation .pager a {
   color: black;
